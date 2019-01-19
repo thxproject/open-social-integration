@@ -1,0 +1,5 @@
+name: 'THX Open Social Integration'
+type: module
+description: 'Open Social integrates with THX.'
+core: 8.x
+package: 'THX'

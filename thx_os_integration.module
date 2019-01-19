@@ -1,0 +1,96 @@
+<?php
+
+/**
+ * @file
+ * Contains thx_os_integration.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * @see \Drupal\user\RegisterForm
+ */
+function thx_os_integration_form_user_register_form_alter(&$form, FormStateInterface $form_state) {
+  $form['#attached']['library'][] = 'thx_os_integration/contracts';
+  $form['#attached']['library'][] = 'thx_os_integration/reward';
+}
+
+/**
+ * Alter the profileforms.
+ *
+ * @param array $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function thx_os_integration_profile_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  $form['#attached']['library'][] = 'thx_os_integration/contracts';
+  $form['#attached']['library'][] = 'thx_os_integration/reward';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function thx_os_integration_form_profile_profile_add_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  thx_os_integration_profile_form_alter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function thx_os_integration_form_profile_profile_edit_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  thx_os_integration_profile_form_alter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_library_info_build().
+ *
+ * You may load Contracts by attaching like:
+ *
+ * '#attached' => array(
+ *    'library' => array(
+ *    'thx_os_integration/contracts',
+ *   )
+ * ),
+ *
+ * @return array $libraries
+ *   An associative array of libraries registered by $extension. Keyed by
+ *   internal library name and passed by reference.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ *
+ * @return array Library.
+ */
+function thx_os_integration_library_info_build() {
+  $libraries = array();
+  $contracts = [
+    'THXToken' => [
+      'jsonInterface' => json_decode(file_get_contents('/var/www/thx-client/build/contracts/THXToken.json')),
+      'address' => '0x30C50CA314e1417E8aB175ffc7380361806a38Cc',
+    ],
+    'RewardPool' => [
+      'jsonInterface' => json_decode(file_get_contents('/var/www/thx-client/build/contracts/RewardPool.json')),
+      'address' => '0x4900994202e8124A2248855A01D54445b219Ea10',
+    ],
+  ];
+  foreach ($contracts as $contract_id => $contract) {
+    $settings['thx_os_integration']['contracts'][$contract_id] = $contract;
+  }
+
+  $libraries['contracts'] = [
+    'version' => '0.9',
+    'dependencies' => [
+      0 => 'core/drupalSettings',
+    ],
+    'drupalSettings' => $settings,
+  ];
+  return $libraries;
+}

@@ -1,0 +1,11 @@
+reward:
+  version: VERSION
+  js:
+    js/reward.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/drupalSettings
+    - core/jquery.once
+    - ethereum/web3
+
