@@ -1,5 +1,5 @@
 {
-  "name": "drupal/thx_os_integration",
+  "name": "goalgorilla/thx_os_integration",
   "type": "drupal-module",
   "description": "Open Social integrates with THX.",
   "keywords": ["Drupal", "THX", "Open Social", "ethereum", "blockchain"],
