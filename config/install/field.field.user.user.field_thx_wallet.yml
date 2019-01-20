@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_thx_wallet
+  module:
+    - user
+id: user.user.field_thx_wallet
+field_name: field_thx_wallet
+entity_type: user
+bundle: user
+label: 'THX Wallet'
+description: 'IMPORTANT: You will deposit ETH and receive THX tokens at this address. Make sure to use your Ethereum wallet address, and NOT  an address from changes like Coinbase, Kraken, Poloniex, Gemini, Bittrex, etc. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

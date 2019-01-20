@@ -1,0 +1,5 @@
+<?php
+
+function thx_os_integration_install() {
+
+}

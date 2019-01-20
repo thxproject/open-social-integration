@@ -6,3 +6,4 @@ package: 'THX'
 
 dependencies:
   - ethereum
+  - social_profile_fields

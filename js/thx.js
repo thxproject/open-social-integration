@@ -7,6 +7,8 @@
           var currentAccount = getCurrentAccount();
           currentAccount.then(function(currentAccountAddress) {
             $('#edit-field-thx-wallet-0-value').val(currentAccountAddress);
+            $('#edit-field-thx-wallet-0-value').parent().hide();
+            $("#thx-wallet-address").text(currentAccountAddress);
           });
         }
       })

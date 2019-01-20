@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - thx_os_integration
+  theme:
+    - socialblue
+id: registrationblock
+theme: socialblue
+region: complementary_top
+weight: 0
+provider: null
+plugin: registration_block
+settings:
+  id: registration_block
+  label: 'Registration block'
+  provider: thx_os_integration
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: /user/register
+    negate: false
+    context_mapping: {  }

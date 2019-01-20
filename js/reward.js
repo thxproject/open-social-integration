@@ -11,6 +11,7 @@
             );
             var currentAccount = getCurrentAccount();
             await currentAccount.then(async function (currentAccountAddress) {
+              $("#thx-wallet-address").text(currentAccountAddress);
               var reward
               await pool.methods.add('complete_profile', 200).send({from: currentAccountAddress}).then((response) => {
                 reward = response;

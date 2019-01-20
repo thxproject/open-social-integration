@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - thx_os_integration
+    - user
+  theme:
+    - socialblue
+id: profileblock
+theme: socialblue
+region: complementary_top
+weight: 0
+provider: null
+plugin: profile_block
+settings:
+  id: profile_block
+  label: 'Profile block'
+  provider: thx_os_integration
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: '/user/*/profile'
+    negate: false
+    context_mapping: {  }
+  user_role:
+    id: user_role
+    roles:
+      authenticated: authenticated
+    negate: false
+    context_mapping:
+      user: '@social_user.user_route_context:user'
