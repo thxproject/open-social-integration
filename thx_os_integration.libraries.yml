@@ -1,3 +1,14 @@
+thx:
+  version: VERSION
+  js:
+    js/thx.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/drupalSettings
+    - core/jquery.once
+    - ethereum/web3
+
 reward:
   version: VERSION
   js:
@@ -8,3 +19,4 @@ reward:
     - core/drupalSettings
     - core/jquery.once
     - ethereum/web3
+    - thx_os_integration/thx

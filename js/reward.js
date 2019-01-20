@@ -1,20 +1,25 @@
 (function ($, Drupal) {
   Drupal.behaviors.reward = {
-    attach: function (context, settings) {
-      var addressUser = '0xfD21b9c95f0a4b472e8594d870FF79bb5a23903F';
+    attach: async function (context, settings) {
+      checkDappBrowser().then(async (r) => {
+        $("form#profile-profile-edit-form button.form-submit").once().click(async function(f) {
+          var networkId = await web3.eth.net.getId();
+          if (networkId) {
+            var pool = new web3.eth.Contract(
+                settings.thx_os_integration.contracts.RewardPool.jsonInterface.abi,
+                settings.thx_os_integration.contracts.RewardPool.jsonInterface.networks[networkId].address
+            );
+            var currentAccount = getCurrentAccount();
+            await currentAccount.then(async function (currentAccountAddress) {
+              var reward
+              await pool.methods.add('complete_profile', 200).send({from: currentAccountAddress}).then((response) => {
+                reward = response;
+              })
+            });
+          }
 
-      var token = new web3.eth.Contract(settings.thx_os_integration.contracts.THXToken.jsonInterface.abi, settings.thx_os_integration.contracts.THXToken.address);
-      var pool = new web3.eth.Contract(settings.thx_os_integration.contracts.RewardPool.jsonInterface.abi, settings.thx_os_integration.contracts.RewardPool.address);
-
-      // var account_balance
-      // token.methods.balanceOf(addressUser).call().then((response) => {
-      //   account_balance = response;
-      // })
-
-      var reward
-      pool.methods.add('complete_profile', 200).send({from: addressUser}).then((response) => {
-        reward = response;
-      })
+        });
+      });
 
     }
   };

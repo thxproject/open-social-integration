@@ -2,13 +2,14 @@
   "name": "drupal/thx_os_integration",
   "type": "drupal-module",
   "description": "Open Social integrates with THX.",
-  "keywords": ["Drupal"],
+  "keywords": ["Drupal", "THX", "Open Social", "ethereum", "blockchain"],
   "license": "GPL-2.0+",
-  "homepage": "https://www.drupal.org/project/thx_os_integration",
+  "homepage": "https://www.thxproject.com",
   "minimum-stability": "dev",
   "support": {
-    "issues": "https://www.drupal.org/project/issues/thx_os_integration",
-    "source": "http://cgit.drupalcode.org/thx_os_integration"
+    "source": "http://bitbucket.org/goalgorilla/thx_os_integration"
   },
-  "require": { }
+  "require": {
+    "drupal/ethereum": "1.x-dev"
+  }
 }

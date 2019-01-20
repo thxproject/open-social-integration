@@ -21,6 +21,7 @@ use Drupal\Core\Url;
  */
 function thx_os_integration_form_user_register_form_alter(&$form, FormStateInterface $form_state) {
   $form['#attached']['library'][] = 'thx_os_integration/contracts';
+  $form['#attached']['library'][] = 'thx_os_integration/thx';
   $form['#attached']['library'][] = 'thx_os_integration/reward';
 }
 
@@ -33,6 +34,7 @@ function thx_os_integration_form_user_register_form_alter(&$form, FormStateInter
  */
 function thx_os_integration_profile_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
   $form['#attached']['library'][] = 'thx_os_integration/contracts';
+  $form['#attached']['library'][] = 'thx_os_integration/thx';
   $form['#attached']['library'][] = 'thx_os_integration/reward';
 }
 
@@ -74,11 +76,9 @@ function thx_os_integration_library_info_build() {
   $contracts = [
     'THXToken' => [
       'jsonInterface' => json_decode(file_get_contents('/var/www/thx-client/build/contracts/THXToken.json')),
-      'address' => '0x30C50CA314e1417E8aB175ffc7380361806a38Cc',
     ],
     'RewardPool' => [
       'jsonInterface' => json_decode(file_get_contents('/var/www/thx-client/build/contracts/RewardPool.json')),
-      'address' => '0x4900994202e8124A2248855A01D54445b219Ea10',
     ],
   ];
   foreach ($contracts as $contract_id => $contract) {
