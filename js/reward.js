@@ -6,8 +6,8 @@
           var networkId = await web3.eth.net.getId();
           if (networkId) {
             var pool = new web3.eth.Contract(
-                settings.thx_os_integration.contracts.RewardPool.jsonInterface.abi,
-                settings.thx_os_integration.contracts.RewardPool.jsonInterface.networks[networkId].address
+                settings.thx_os_integration.contracts.RewardPool.abi,
+                settings.thx_os_integration.contracts.RewardPool.address
             );
             var currentAccount = getCurrentAccount();
             await currentAccount.then(async function (currentAccountAddress) {
